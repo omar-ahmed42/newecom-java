@@ -30,8 +30,6 @@ public class StudentCreationActionServlet extends HttpServlet {
         Long min = null;
         Long max = null;
         for (Cookie cookie : request.getCookies()) {
-            System.out.println("cookie name: " + cookie.getName());
-            System.out.println("cookie value: " + cookie.getValue());
             if (cookie.getName().equals("range.min")) {
                 min = Long.valueOf(cookie.getValue());
             } else if (cookie.getName().equals("range.max")) {
