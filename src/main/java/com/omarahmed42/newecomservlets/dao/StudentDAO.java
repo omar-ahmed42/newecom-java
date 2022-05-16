@@ -3,6 +3,7 @@ package com.omarahmed42.newecomservlets.dao;
 
 
 import com.omarahmed42.newecomservlets.entities.StudentEntity;
+import com.omarahmed42.newecomservlets.structures.Range;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ public interface StudentDAO {
     void deleteStudent(StudentEntity studentEntity);
     void updateStudent(StudentEntity studentEntity);
     StudentEntity findStudentByCredentials(Long id, String password);
+
+    Range findMinAndMaxIdsInRange(Long min, Long max);
 }

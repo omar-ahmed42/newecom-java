@@ -10,6 +10,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Path("/student")
@@ -55,7 +56,8 @@ public class StudentController {
         }
 
         if (!isEmpty(dateOfBirth)){
-            student.setDateOfBirth(Date.valueOf(dateOfBirth.split("/")[2]));
+//            student.setDateOfBirth(Date.valueOf(dateOfBirth.split("/")[2]));
+            student.setDateOfBirth(LocalDate.parse(dateOfBirth.split("/")[2]));
         }
 
         if (!isEmpty(academicYear)){

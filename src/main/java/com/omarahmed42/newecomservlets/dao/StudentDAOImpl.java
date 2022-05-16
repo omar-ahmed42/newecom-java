@@ -2,9 +2,11 @@ package com.omarahmed42.newecomservlets.dao;
 
 
 import com.omarahmed42.newecomservlets.entities.StudentEntity;
+import com.omarahmed42.newecomservlets.structures.Range;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -52,6 +54,18 @@ public class StudentDAOImpl implements StudentDAO{
         studentTypedQuery.setParameter("id", id);
         studentTypedQuery.setParameter("password", password);
         return studentTypedQuery.getSingleResult();
+    }
+
+    @Override
+    public Range findMinAndMaxIdsInRange(Long min, Long max){
+        Query findMaxQuery = entityManager.createQuery("SELECT MAX(student.studentId) FROM StudentEntity student WHERE student.studentId <= :max");
+        findMaxQuery.setParameter("max", max);
+        Long maxResult = (Long) findMaxQuery.getSingleResult();
+        Query findMinQuery = entityManager.createQuery("SELECT MIN(student.studentId) FROM StudentEntity student WHERE student.studentId >= :min");
+        findMinQuery.setParameter("min", min);
+        Long minResult = (Long) findMinQuery.getSingleResult();
+
+        return new Range(minResult, maxResult);
     }
 
 }

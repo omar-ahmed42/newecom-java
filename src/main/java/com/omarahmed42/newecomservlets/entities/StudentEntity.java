@@ -6,7 +6,7 @@ import com.omarahmed42.newecomservlets.enums.AcademicYear;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Set;
 import java.util.UUID;
@@ -19,7 +19,7 @@ public class StudentEntity implements Serializable {
     private String firstName;
     private String lastName;
     private String password;
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
     private AcademicYear academicYear;
     private Set<CompletedCourseEntity> completedCoursesByStudentId;
     private Collection<RegistersCourseEntity> registersCoursesByStudentId;
@@ -31,6 +31,21 @@ public class StudentEntity implements Serializable {
         this.studentId = studentId;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.academicYear = academicYear;
+    }
+
+    public StudentEntity(String firstName, String lastName, LocalDate dateOfBirth, AcademicYear academicYear) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.academicYear = academicYear;
+    }
+
+    public StudentEntity(long studentId, String firstName, String lastName, LocalDate dateOfBirth, AcademicYear academicYear) {
+        this.studentId = studentId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
         this.academicYear = academicYear;
     }
 
@@ -76,11 +91,11 @@ public class StudentEntity implements Serializable {
 
     @Basic
     @Column(name = "date_of_birth")
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
