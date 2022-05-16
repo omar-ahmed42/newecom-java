@@ -42,7 +42,6 @@ public class StudentCreationServlet extends HttpServlet {
         rangeMin.setMaxAge(5 * 1000 * 10);
         response.addCookie(rangeMax);
 
-        response.addCookie(new Cookie("bateekha", "bateekhaValue"));
         request.getRequestDispatcher("/admin/student/creation.jsp").forward(request, response);
     }
 

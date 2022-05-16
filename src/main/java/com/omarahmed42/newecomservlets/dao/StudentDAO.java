@@ -17,4 +17,6 @@ public interface StudentDAO {
     StudentEntity findStudentByCredentials(Long id, String password);
 
     Range findMinAndMaxIdsInRange(Long min, Long max);
+
+    Range findMinAndMaxIdsOrNextInRange(Long min, Long max);
 }

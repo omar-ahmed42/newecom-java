@@ -11,6 +11,17 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.UUID;
 
+
+@NamedStoredProcedureQuery(
+        name = "get_next_student_id_procedure",
+        procedureName = "get_next_student_id_procedure",
+        resultClasses = StudentEntity.class,
+        parameters = {
+                @StoredProcedureParameter(mode = ParameterMode.IN, type = Long.class, name = "min_id"),
+                @StoredProcedureParameter(mode = ParameterMode.IN, type = Long.class, name = "max_id"),
+                @StoredProcedureParameter(mode = ParameterMode.OUT, type = Long.class, name = "next_student_id")
+        }
+)
 @Entity
 @Table(name = "student")
 @JsonInclude(JsonInclude.Include.NON_NULL)

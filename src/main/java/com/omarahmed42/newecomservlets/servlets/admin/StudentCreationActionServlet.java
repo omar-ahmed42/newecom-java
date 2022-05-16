@@ -37,6 +37,8 @@ public class StudentCreationActionServlet extends HttpServlet {
             }
         }
 
+        System.out.println("MIN_ACTION: " + min);
+        System.out.println("MAX_ACTION: " + max);
         try {
             studentCreationService.setRange(min, max);
             StudentEntity student = createUserUsingFormData(request);

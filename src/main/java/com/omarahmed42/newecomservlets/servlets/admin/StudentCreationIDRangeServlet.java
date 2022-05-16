@@ -28,19 +28,19 @@ public class StudentCreationIDRangeServlet extends HttpServlet {
         Long min = Long.valueOf(request.getParameter("range-min"));
         Long max = Long.valueOf(request.getParameter("range-max"));
         studentCreationService.setRange(min, max);
+        System.out.println("min_servlet_yarab: " + min);
+        System.out.println("max_servlet_yarab: " + max);
         Long numberOfVacantPlaces = studentCreationService.calculateNumberOfVacantPlaces();
-        System.out.println("Number Of Vacant_Servlet: " + numberOfVacantPlaces);
         if (numberOfVacantPlaces <= 0){
             response.sendRedirect("/newecom-servlets-1.0-SNAPSHOT/admin/student/student-range.jsp");
             return;
         }
 
+        System.out.println("min_servlet_yarab2: " + min);
+        System.out.println("max_servlet_yarab2: " + max);
+
         Range range = new Range(min, max);
         request.setAttribute("range", range);
-        System.out.println("here");
-//        request.getRequestDispatcher("/admin/student/creation.jsp").forward(request, response);
         request.getRequestDispatcher("student-creation").forward(request, response);
-//        getServletContext().getRequestDispatcher("/newecom-servlets-1.0-SNAPSHOT/admin/student-creation").forward(request, response);
-//        response.sendRedirect("student-creation");
     }
 }

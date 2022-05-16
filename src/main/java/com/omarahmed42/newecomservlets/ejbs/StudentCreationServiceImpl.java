@@ -56,7 +56,7 @@ public class StudentCreationServiceImpl implements StudentCreationService {
 
     @Override
     public void addStudent(StudentEntity student) {
-        Range minAndMaxIdsInRange = studentDAO.findMinAndMaxIdsInRange(min, max);
+        Range minAndMaxIdsInRange = studentDAO.findMinAndMaxIdsOrNextInRange(min, max);
         Long numberOfVacantPlaces = Long.valueOf(0);
 
 
@@ -72,16 +72,24 @@ public class StudentCreationServiceImpl implements StudentCreationService {
             numberOfVacantPlaces = numberOfVacantPlaces + (max - minAndMaxIdsInRange.max);
         }
 
+        System.out.println("BEFORE CREATION_MIN_RANGE: " + minAndMaxIdsInRange.min);
+        System.out.println("BEFORE CREATION_MAX_RANGE: " + minAndMaxIdsInRange.max);
+        System.out.println("BEFORE CREATION_MIN: " + min);
+        System.out.println("BEFORE CREATION_MAX: " + max);
         if (numberOfVacantPlaces > 0) {
 
             if (Objects.isNull(minAndMaxIdsInRange.min) || Objects.isNull(minAndMaxIdsInRange.max)) {
                 student.setStudentId(min);
-            } else if (min < minAndMaxIdsInRange.min) {
+            } else if (minAndMaxIdsInRange.isMinNextID) {
+                student.setStudentId(minAndMaxIdsInRange.min);
+            }
+            else if (min < minAndMaxIdsInRange.min) {
                 student.setStudentId(minAndMaxIdsInRange.min - 1);
             } else if (max > minAndMaxIdsInRange.max) {
                 student.setStudentId(minAndMaxIdsInRange.max + 1);
             }
 
+            System.out.println("STUDENT ID: " + student.getStudentId());
             studentDAO.addStudent(student);
         }
     }
