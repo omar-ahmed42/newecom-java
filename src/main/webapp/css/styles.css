@@ -1,0 +1,112 @@
+* {
+    box-sizing: border-box;
+}
+
+#list-students {
+    margin: 0 auto;
+    width: 96vh;
+}
+
+
+#list-students-2 {
+    margin: 0 auto;
+    width: 70vh;
+    float: right;
+}
+
+.student-wrapper {
+    display: flex;
+    flex: 1;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.student-id {
+    width: 16vh;
+    font-size: 2vh;
+    padding: 0.5vh;
+    font-family: Arial, serif;
+    border-right: 1px solid black;
+
+}
+
+.student-name {
+    width: 30vh;
+    font-size: 2vh;
+    padding: 0.5vh;
+    font-family: Arial, serif;
+    border-right: 1px solid black;
+}
+
+.student-n-courses {
+    width: 50vh;
+    font-size: 2vh;
+    padding: 0.5vh;
+    text-align: center;
+    font-family: Arial, serif;
+    border-right: 1px solid black;
+}
+
+.student-anchor {
+    text-decoration: none !important;
+    color: inherit;
+}
+
+.student-anchor:hover {
+    cursor: pointer;
+}
+
+.student-anchor:visited {
+    color: inherit;
+}
+
+.course-wrapper {
+    display: flex;
+    flex: 1;
+    font-family: Arial, serif;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+#list-courses {
+    margin: 0 auto;
+    width: 40vh;
+}
+
+.contour {
+    float: contour;
+}
+
+#list-past-courses {
+    margin: 0 auto;
+    width: 40vh;
+}
+
+
+.course-code {
+    width: 16vh;
+    font-size: 2vh;
+    padding: 0.5vh;
+    font-family: Arial, serif;
+    border-right: 1px solid black;
+}
+
+.course-name {
+    width: 30vh;
+    font-size: 2vh;
+    padding: 0.5vh;
+    font-family: Arial, serif;
+}
+
+.cursor:hover {
+    cursor: pointer;
+    background-color: lightgrey;
+}
+
+.f {
+    float: right;
+}
