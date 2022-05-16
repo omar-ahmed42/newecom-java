@@ -45,20 +45,6 @@ public class StudentCreationServiceImpl implements StudentCreationService {
         }
         return numberOfVacantPlaces;
     }
-//
-//    public Long calculateNumberOfVacantPlaces(){
-//        Range minAndMaxIdsInRange = studentDAO.findMinAndMaxIdsInRange(min, max);
-//        Long numberOfVacantPlaces = Long.valueOf(0);
-//
-//        if (min < minAndMaxIdsInRange.min) {
-//            numberOfVacantPlaces = numberOfVacantPlaces + (minAndMaxIdsInRange.min - min);
-//        }
-//
-//        if (max > minAndMaxIdsInRange.max) {
-//            numberOfVacantPlaces = numberOfVacantPlaces + (max - minAndMaxIdsInRange.max);
-//        }
-//        return numberOfVacantPlaces;
-//    }
 
     @Override
     public void addStudent(StudentEntity student) {
