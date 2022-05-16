@@ -68,8 +68,6 @@ public class RegistersCourseDaoImpl implements RegistersCourseDao{
 
     @Override
     public void updateRegistersCourse(RegistersCourseEntity registersCourseEntity) { // Not working correctly
-        System.out.println("Registered ID: " + registersCourseEntity.getStudentId());
-        System.out.println("Registered Code: " + registersCourseEntity.getCourseCode());
         entityManager.merge(registersCourseEntity);
         entityManager.flush();
     }

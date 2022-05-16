@@ -33,24 +33,17 @@ public class StudentCreationServiceImpl implements StudentCreationService {
         Long numberOfVacantPlaces = Long.valueOf(0);
 
         if (Objects.isNull(minAndMaxIdsInRange.min) || Objects.isNull(minAndMaxIdsInRange.max)) {
-            System.out.println("In: " + (max - min));
             return max - min;
         }
 
         if (min < minAndMaxIdsInRange.min) {
-            System.out.println("Calc_MinRange: " + minAndMaxIdsInRange.min);
-            System.out.println("Calc_Min: " + minAndMaxIdsInRange.min);
             numberOfVacantPlaces = numberOfVacantPlaces + (minAndMaxIdsInRange.min - min);
         }
 
         if (max > minAndMaxIdsInRange.max) {
-            System.out.println("Calc_MaxRange: " + minAndMaxIdsInRange.max);
-            System.out.println("Calc_Max: " + minAndMaxIdsInRange.max);
             numberOfVacantPlaces = numberOfVacantPlaces + (max - minAndMaxIdsInRange.max);
         }
 
-        System.out.println("CALC_OUT_MAX_RANGE: " + minAndMaxIdsInRange.max);
-        System.out.println("CALC_OUT_MIN_RANGE: " + minAndMaxIdsInRange.min);
         return numberOfVacantPlaces;
     }
 
@@ -72,10 +65,6 @@ public class StudentCreationServiceImpl implements StudentCreationService {
             numberOfVacantPlaces = numberOfVacantPlaces + (max - minAndMaxIdsInRange.max);
         }
 
-        System.out.println("BEFORE CREATION_MIN_RANGE: " + minAndMaxIdsInRange.min);
-        System.out.println("BEFORE CREATION_MAX_RANGE: " + minAndMaxIdsInRange.max);
-        System.out.println("BEFORE CREATION_MIN: " + min);
-        System.out.println("BEFORE CREATION_MAX: " + max);
         if (numberOfVacantPlaces > 0) {
 
             if (Objects.isNull(minAndMaxIdsInRange.min) || Objects.isNull(minAndMaxIdsInRange.max)) {
@@ -89,7 +78,6 @@ public class StudentCreationServiceImpl implements StudentCreationService {
                 student.setStudentId(minAndMaxIdsInRange.max + 1);
             }
 
-            System.out.println("STUDENT ID: " + student.getStudentId());
             studentDAO.addStudent(student);
         }
     }

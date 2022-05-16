@@ -21,12 +21,8 @@ public class StudentCreationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Range range = (Range) request.getAttribute("range");
-        System.out.println("Get_min: " + range.min);
-        System.out.println("Get_max: " + range.max);
         studentCreationService.setRange(range.min, range.max);
         Long numberOfVacantPlaces = studentCreationService.calculateNumberOfVacantPlaces();
-        System.out.println("MIN: " + studentCreationService.getMin());
-        System.out.println("MAX: " + studentCreationService.getMax());
 
         if (numberOfVacantPlaces <= 0) {
             response.sendRedirect("/newecom-servlets-1.0-SNAPSHOT/admin/student/student-range.jsp");
@@ -36,7 +32,6 @@ public class StudentCreationServlet extends HttpServlet {
         Cookie rangeMin = new Cookie("range.min", range.min.toString());
         rangeMin.setMaxAge(5 * 1000 * 10);
         response.addCookie(rangeMin);
-        System.out.println("name in creation: "+  rangeMin.getName());
 
         Cookie rangeMax = new Cookie("range.max", range.max.toString());
         rangeMin.setMaxAge(5 * 1000 * 10);
@@ -48,8 +43,6 @@ public class StudentCreationServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Range range = (Range) request.getAttribute("range");
-        System.out.println("Range_min: " + range.min);
-        System.out.println("Range_max: " + range.max);
         doGet(request, response);
     }
 }

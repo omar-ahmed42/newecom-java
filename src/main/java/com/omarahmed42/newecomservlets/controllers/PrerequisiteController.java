@@ -14,18 +14,9 @@ public class PrerequisiteController {
     @EJB
     private PrerequisiteService prerequisiteService;
 
-//    @GET
-//    @Path("/courses/year/{academicYear}")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Response getEligibleCourses(@PathParam("academicYear") AcademicYear academicYear){
-//        List<PrerequisiteEntity> eligibleCourses = prerequisiteService.getEligibleCoursesForAcademicYear(academicYear);
-//        return Response.ok(eligibleCourses).build();
-//    }
-
     @POST
     @Path("/course/")
     public Response addPrerequisite(PrerequisiteEntity prerequisite) {
-        System.out.println("PRE: " + prerequisite.getCourseCode());
         prerequisiteService.addPrerequisite(prerequisite);
         return Response.ok().build();
     }

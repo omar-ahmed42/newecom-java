@@ -22,7 +22,6 @@ public class StudentInfoTemplateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Long staffId = (Long) request.getSession().getAttribute("staffId"); //Handle it
-        System.out.println("VISITED info");
         String courseCode = request.getParameter("courseCode");
         List<StudentEntity> studentsInStaffCourse = staffStudentCourse.getStudentsInStaffCourse(staffId, courseCode);
         request.setAttribute("students", studentsInStaffCourse);

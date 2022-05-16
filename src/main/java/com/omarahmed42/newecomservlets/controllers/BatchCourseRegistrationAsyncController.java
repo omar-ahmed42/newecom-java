@@ -29,7 +29,6 @@ public class BatchCourseRegistrationAsyncController {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response registersInCourses(Set<RegistersCourseEntity> registersCourses){
-        System.out.println("hello");
         JMSContext context = connectionFactory.createContext();
         context.createProducer().send(queue, (Serializable) registersCourses);
         context.close();
