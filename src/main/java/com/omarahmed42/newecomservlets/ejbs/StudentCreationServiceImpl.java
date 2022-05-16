@@ -33,16 +33,24 @@ public class StudentCreationServiceImpl implements StudentCreationService {
         Long numberOfVacantPlaces = Long.valueOf(0);
 
         if (Objects.isNull(minAndMaxIdsInRange.min) || Objects.isNull(minAndMaxIdsInRange.max)) {
+            System.out.println("In: " + (max - min));
             return max - min;
         }
 
         if (min < minAndMaxIdsInRange.min) {
+            System.out.println("Calc_MinRange: " + minAndMaxIdsInRange.min);
+            System.out.println("Calc_Min: " + minAndMaxIdsInRange.min);
             numberOfVacantPlaces = numberOfVacantPlaces + (minAndMaxIdsInRange.min - min);
         }
 
         if (max > minAndMaxIdsInRange.max) {
+            System.out.println("Calc_MaxRange: " + minAndMaxIdsInRange.max);
+            System.out.println("Calc_Max: " + minAndMaxIdsInRange.max);
             numberOfVacantPlaces = numberOfVacantPlaces + (max - minAndMaxIdsInRange.max);
         }
+
+        System.out.println("CALC_OUT_MAX_RANGE: " + minAndMaxIdsInRange.max);
+        System.out.println("CALC_OUT_MIN_RANGE: " + minAndMaxIdsInRange.min);
         return numberOfVacantPlaces;
     }
 
@@ -68,9 +76,9 @@ public class StudentCreationServiceImpl implements StudentCreationService {
 
             if (Objects.isNull(minAndMaxIdsInRange.min) || Objects.isNull(minAndMaxIdsInRange.max)) {
                 student.setStudentId(min);
-            } else if (Objects.nonNull(minAndMaxIdsInRange.min) && min < minAndMaxIdsInRange.min) {
+            } else if (min < minAndMaxIdsInRange.min) {
                 student.setStudentId(minAndMaxIdsInRange.min - 1);
-            } else if (Objects.nonNull(minAndMaxIdsInRange.max) && max > minAndMaxIdsInRange.max) {
+            } else if (max > minAndMaxIdsInRange.max) {
                 student.setStudentId(minAndMaxIdsInRange.max + 1);
             }
 
