@@ -8,12 +8,15 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
 import javax.ejb.StatefulTimeout;
 import javax.inject.Inject;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 @Stateful
 @LocalBean
 @StatefulTimeout(unit = TimeUnit.HOURS, value = 6)
+@Path("/bean/studentCreation")
 public class StudentCreationServiceImpl implements StudentCreationService {
 
     private Long min;
@@ -48,6 +51,7 @@ public class StudentCreationServiceImpl implements StudentCreationService {
     }
 
     @Override
+    @POST
     public void addStudent(StudentEntity student) {
         Range minAndMaxIdsInRange = studentDAO.findMinAndMaxIdsOrNextInRange(min, max);
         Long numberOfVacantPlaces = Long.valueOf(0);
