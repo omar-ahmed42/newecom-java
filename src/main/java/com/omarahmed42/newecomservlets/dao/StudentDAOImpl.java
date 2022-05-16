@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
+import java.util.Objects;
 
 public class StudentDAOImpl implements StudentDAO{
 
@@ -64,6 +65,7 @@ public class StudentDAOImpl implements StudentDAO{
         Query findMinQuery = entityManager.createQuery("SELECT MIN(student.studentId) FROM StudentEntity student WHERE student.studentId >= :min");
         findMinQuery.setParameter("min", min);
         Long minResult = (Long) findMinQuery.getSingleResult();
+
 
         return new Range(minResult, maxResult);
     }
