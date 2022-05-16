@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
-public class StudentDAOImpl implements StudentDAO{
+public class StudentDAOImpl implements StudentDAO {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -19,15 +19,15 @@ public class StudentDAOImpl implements StudentDAO{
     }
 
     @Override
-    public List<StudentEntity> findSliceOfStudents(int page, int size){
+    public List<StudentEntity> findSliceOfStudents(int page, int size) {
         TypedQuery<StudentEntity> typedQuery = entityManager.createQuery("SELECT s FROM StudentEntity s", StudentEntity.class);
-        typedQuery.setFirstResult((page-1) * size);
+        typedQuery.setFirstResult((page - 1) * size);
         typedQuery.setMaxResults(size);
         return typedQuery.getResultList();
     }
 
     @Override
-    public List<StudentEntity> findAllStudents(){
+    public List<StudentEntity> findAllStudents() {
         return entityManager.createQuery("SELECT s FROM StudentEntity s", StudentEntity.class).getResultList();
     }
 
@@ -55,7 +55,7 @@ public class StudentDAOImpl implements StudentDAO{
     }
 
     @Override
-    public Range findMinAndMaxIdsInRange(Long min, Long max){
+    public Range findMinAndMaxIdsInRange(Long min, Long max) {
         Query findMaxQuery = entityManager.createQuery("SELECT MAX(student.studentId) FROM StudentEntity student WHERE student.studentId <= :max");
         findMaxQuery.setParameter("max", max);
         Long maxResult = (Long) findMaxQuery.getSingleResult();
@@ -63,7 +63,7 @@ public class StudentDAOImpl implements StudentDAO{
         findMinQuery.setParameter("min", min);
         Long minResult = (Long) findMinQuery.getSingleResult();
 
-        if (Objects.nonNull(maxResult) && Objects.nonNull(minResult) && minResult.equals(min) && maxResult.equals(max)){
+        if (Objects.nonNull(maxResult) && Objects.nonNull(minResult) && minResult.equals(min) && maxResult.equals(max)) {
             StoredProcedureQuery storedProcedureQuery = entityManager.createNamedStoredProcedureQuery("get_next_student_id_procedure");
             storedProcedureQuery.setParameter("min_id", minResult);
             storedProcedureQuery.setParameter("max_id", maxResult);
@@ -75,7 +75,7 @@ public class StudentDAOImpl implements StudentDAO{
     }
 
     @Override
-    public Range findMinAndMaxIdsOrNextInRange(Long min, Long max){
+    public Range findMinAndMaxIdsOrNextInRange(Long min, Long max) {
         Query findMaxQuery = entityManager.createQuery("SELECT MAX(student.studentId) FROM StudentEntity student WHERE student.studentId <= :max");
         findMaxQuery.setParameter("max", max);
         Long maxResult = (Long) findMaxQuery.getSingleResult();
@@ -83,7 +83,7 @@ public class StudentDAOImpl implements StudentDAO{
         findMinQuery.setParameter("min", min);
         Long minResult = (Long) findMinQuery.getSingleResult();
 
-        if (Objects.nonNull(maxResult) && Objects.nonNull(minResult) && minResult.equals(min) && maxResult.equals(max)){
+        if (Objects.nonNull(maxResult) && Objects.nonNull(minResult) && minResult.equals(min) && maxResult.equals(max)) {
             StoredProcedureQuery storedProcedureQuery = entityManager.createNamedStoredProcedureQuery("get_next_student_id_procedure");
             storedProcedureQuery.setParameter("min_id", minResult);
             storedProcedureQuery.setParameter("max_id", maxResult);
@@ -93,6 +93,17 @@ public class StudentDAOImpl implements StudentDAO{
         }
 
         return new Range(minResult, maxResult, false);
+    }
+
+    @Override
+    public Long countNumberOfIdsInRange(Long min, Long max) { //"SELECT COUNT(student.studentId) FROM StudentEntity student WHERE studentId >= min and studentId <= :max"
+        String queryStatement = "SELECT COUNT(student.studentId) FROM StudentEntity student WHERE student.studentId >= :min AND student.studentId <= :max";
+        Query query = entityManager.createQuery(queryStatement);
+        query.setParameter("min", min);
+        query.setParameter("max", max);
+        Long count = (Long) query.getSingleResult();
+        return count;
+
     }
 
 }

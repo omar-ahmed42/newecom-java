@@ -50,6 +50,10 @@ public class StudentCreationServiceImpl implements StudentCreationService {
         return numberOfVacantPlaces;
     }
 
+    public Range findMinAndMaxIdsOrNextInRange(){
+        return studentDAO.findMinAndMaxIdsOrNextInRange(min, max);
+    }
+
     @Override
     @POST
     public void addStudent(StudentEntity student) {
@@ -84,6 +88,10 @@ public class StudentCreationServiceImpl implements StudentCreationService {
 
             studentDAO.addStudent(student);
         }
+    }
+
+    public Long countNumberOfIdsInRange(){
+        return studentDAO.countNumberOfIdsInRange(min, max);
     }
 
     public Long getMin() {
