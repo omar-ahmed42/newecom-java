@@ -29,6 +29,7 @@ public class StudentCreationIDRangeServlet extends HttpServlet {
         Long max = Long.valueOf(request.getParameter("range-max"));
         studentCreationService.setRange(min, max);
         Long numberOfVacantPlaces = studentCreationService.calculateNumberOfVacantPlaces();
+        System.out.println("Number Of Vacant_Servlet: " + numberOfVacantPlaces);
         if (numberOfVacantPlaces <= 0){
             response.sendRedirect("/newecom-servlets-1.0-SNAPSHOT/admin/student/student-range.jsp");
             return;
