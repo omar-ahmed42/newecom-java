@@ -31,11 +31,10 @@ public class LoginAsStaffServlet extends HttpServlet {
         StaffEntity user = (StaffEntity) authenticationService.login(id, password, UserType.STAFF);
 
         if (Objects.isNull(user)) {
-            request.getRequestDispatcher("/staff/login.jsp").forward(request, response);
+            response.sendRedirect("login");
         } else {
             request.getSession().setAttribute("staffId", user.getStaffId());
-            request.getRequestDispatcher("/staff/courses").forward(request, response);
-
+            response.sendRedirect("courses");
         }
 
     }

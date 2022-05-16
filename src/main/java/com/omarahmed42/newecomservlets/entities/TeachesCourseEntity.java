@@ -14,6 +14,14 @@ public class TeachesCourseEntity implements Serializable {
     private StaffEntity staffByStaffId;
     private CourseEntity courseByCourseCode;
 
+    public TeachesCourseEntity() {
+    }
+
+    public TeachesCourseEntity(long staffId, String courseCode) {
+        this.staffId = staffId;
+        this.courseCode = courseCode;
+    }
+
     @Id
     @Column(name = "staff_id")
     public long getStaffId() {

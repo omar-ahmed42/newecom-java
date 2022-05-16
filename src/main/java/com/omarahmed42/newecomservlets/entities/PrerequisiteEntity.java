@@ -16,7 +16,8 @@ public class PrerequisiteEntity implements Serializable {
     private AcademicYear academicYear;
     private CourseEntity courseByCourseCode;
 
-    public PrerequisiteEntity() {}
+    public PrerequisiteEntity() {
+    }
 
     public PrerequisiteEntity(long id, String courseCode, String courseName, AcademicYear academicYear) {
         this.id = id;
@@ -30,7 +31,7 @@ public class PrerequisiteEntity implements Serializable {
         this.academicYear = academicYear;
     }
 
-    public PrerequisiteEntity(long id){
+    public PrerequisiteEntity(long id) {
         this.id = id;
     }
 
@@ -56,7 +57,7 @@ public class PrerequisiteEntity implements Serializable {
 
     @Basic
     @Enumerated(EnumType.STRING)
-    @Column(name = "academic_year", columnDefinition="ENUM('FIRST','SECOND', 'THIRD', 'FOURTH')", nullable = false)
+    @Column(name = "academic_year", columnDefinition = "ENUM('FIRST','SECOND', 'THIRD', 'FOURTH')", nullable = false)
     public AcademicYear getAcademicYear() {
         return academicYear;
     }

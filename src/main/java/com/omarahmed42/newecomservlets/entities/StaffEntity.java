@@ -5,7 +5,9 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Collection;
+import java.util.UUID;
 
 @Entity
 @Table(name = "staff")
@@ -14,10 +16,20 @@ public class StaffEntity implements Serializable {
     private String firstName;
     private String lastName;
     private String password;
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
     private Collection<TeachesCourseEntity> teachesCoursesByStaffId;
 
+    public StaffEntity() {
+    }
+
+    public StaffEntity(String firstName, String lastName, LocalDate dateOfBirth) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+    }
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "staff_id")
     public long getStaffId() {
         return staffId;
@@ -59,12 +71,18 @@ public class StaffEntity implements Serializable {
 
     @Basic
     @Column(name = "date_of_birth")
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    @PrePersist
+    public void generatePassword() {
+        // It would be better to store it hashed in the database
+        this.password = UUID.randomUUID().toString();
     }
 
     @Override

@@ -31,10 +31,10 @@ public class LoginAsAdminServlet extends HttpServlet {
         AdministratorEntity user = (AdministratorEntity) authenticationService.login(id, password, UserType.ADMINISTRATOR);
 
         if (Objects.isNull(user)) {
-            request.getRequestDispatcher("/admin/login.jsp").forward(request, response);
+            response.sendRedirect("login");
         } else {
             request.getSession().setAttribute("administratorId", user.getAdministratorId());
-            request.getRequestDispatcher("/admin/courses").forward(request, response);
+            response.sendRedirect("courses");
         }
 
     }

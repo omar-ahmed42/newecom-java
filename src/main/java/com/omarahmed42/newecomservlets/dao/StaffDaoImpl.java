@@ -6,6 +6,7 @@ import com.omarahmed42.newecomservlets.entities.StaffEntity;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.util.List;
 
 public class StaffDaoImpl implements StaffDao{
 
@@ -39,6 +40,11 @@ public class StaffDaoImpl implements StaffDao{
         staffEntityTypedQuery.setParameter("id", id);
         staffEntityTypedQuery.setParameter("password", password);
         return staffEntityTypedQuery.getSingleResult();
+    }
+
+    @Override
+    public List<StaffEntity> findAllStaff(){
+        return entityManager.createQuery("SELECT s FROM StaffEntity s", StaffEntity.class).getResultList();
     }
 
 }

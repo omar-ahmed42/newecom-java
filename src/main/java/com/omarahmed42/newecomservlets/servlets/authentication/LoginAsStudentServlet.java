@@ -31,12 +31,11 @@ public class LoginAsStudentServlet extends HttpServlet {
         StudentEntity user = (StudentEntity) authenticationService.login(id, password, UserType.STUDENT);
 
         if (Objects.isNull(user)) {
-            request.getRequestDispatcher("/student/login.jsp").forward(request, response);
+            response.sendRedirect("login");
         } else {
             request.getSession().setAttribute("studentId", user.getStudentId());
             request.getSession().setAttribute("academicYear", user.getAcademicYear());
-            request.getRequestDispatcher("/student/courses").forward(request, response);
-
+            response.sendRedirect("courses");
         }
 
     }

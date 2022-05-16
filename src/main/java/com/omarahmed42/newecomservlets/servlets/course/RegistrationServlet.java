@@ -34,7 +34,7 @@ public class RegistrationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Long studentId = (Long) request.getSession().getAttribute("studentId"); //TODO: Handle it
+        Long studentId = (Long) request.getSession().getAttribute("studentId");
         String selectedCourses[] = request.getParameterValues("eligible-courses");
         JMSContext context = connectionFactory.createContext();
         Set<RegistersCourseEntity> registersCourses = new HashSet<>();

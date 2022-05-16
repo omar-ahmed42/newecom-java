@@ -22,7 +22,7 @@
     <filter-mapping>
         <filter-name>StudentAuthorizationFilter</filter-name>
         <url-pattern>/eligible-courses</url-pattern>
-            <url-pattern>/course/registration</url-pattern>
+        <url-pattern>/course/registration</url-pattern>
         <url-pattern>/student/courses</url-pattern>
         <url-pattern>/current-courses</url-pattern>
         <url-pattern>/past-courses</url-pattern>

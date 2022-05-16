@@ -9,6 +9,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Path("/staff")
 @Produces(MediaType.APPLICATION_JSON)
@@ -53,7 +54,7 @@ public class StaffController {
         }
 
         if (!isEmpty(dateOfBirth)){
-            staff.setDateOfBirth(Date.valueOf(dateOfBirth.split("/")[2]));
+            staff.setDateOfBirth(LocalDate.parse((dateOfBirth.split("/")[2])));
         }
 
         staffService.updateStaff(staff);

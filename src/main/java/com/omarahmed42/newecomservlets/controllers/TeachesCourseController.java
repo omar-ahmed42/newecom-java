@@ -22,7 +22,7 @@ public class TeachesCourseController {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response assignStaffToCourse(TeachesCourseEntity teachesCourseEntity){
+    public Response assignStaffToCourse(TeachesCourseEntity teachesCourseEntity) {
         teachesCourseService.assignStaffToCourse(teachesCourseEntity);
         return Response.status(201).build();
     }
@@ -30,7 +30,7 @@ public class TeachesCourseController {
 
     @DELETE
     @Path("/staffId/{staffId}/courseCode/{courseCode}")
-    public Response removeStaffFromCourse(@PathParam("staffId") Long staffId, @PathParam("courseCode") String courseCode){
+    public Response removeStaffFromCourse(@PathParam("staffId") Long staffId, @PathParam("courseCode") String courseCode) {
         TeachesCourseEntityPK teachesCourseEntityPK = new TeachesCourseEntityPK(staffId, courseCode);
         teachesCourseService.removeStaffFromCourse(teachesCourseEntityPK);
         return Response.status(204).build();
@@ -40,7 +40,7 @@ public class TeachesCourseController {
     @Path("/courses")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getCoursesTaughtByStaff(ID idWrapper){
+    public Response getCoursesTaughtByStaff(ID idWrapper) {
         List<CourseEntity> courses = teachesCourseService.getCoursesTaughtByStaff(idWrapper.id);
         return ResponseUtils.buildSuccessfulRequest(200, courses);
     }
