@@ -56,7 +56,6 @@ public class StudentController {
         }
 
         if (!isEmpty(dateOfBirth)) {
-//            student.setDateOfBirth(Date.valueOf(dateOfBirth.split("/")[2]));
             student.setDateOfBirth(LocalDate.parse(dateOfBirth.split("/")[2]));
         }
 
