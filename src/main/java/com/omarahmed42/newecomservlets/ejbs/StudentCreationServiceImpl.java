@@ -8,15 +8,12 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
 import javax.ejb.StatefulTimeout;
 import javax.inject.Inject;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 @Stateful
 @LocalBean
 @StatefulTimeout(unit = TimeUnit.HOURS, value = 6)
-@Path("/bean/studentCreation")
 public class StudentCreationServiceImpl implements StudentCreationService {
 
     private Long min;
@@ -50,12 +47,11 @@ public class StudentCreationServiceImpl implements StudentCreationService {
         return numberOfVacantPlaces;
     }
 
-    public Range findMinAndMaxIdsOrNextInRange(){
+    public Range findMinAndMaxIdsOrNextInRange() {
         return studentDAO.findMinAndMaxIdsOrNextInRange(min, max);
     }
 
     @Override
-    @POST
     public void addStudent(StudentEntity student) {
         Range minAndMaxIdsInRange = studentDAO.findMinAndMaxIdsOrNextInRange(min, max);
         Long numberOfVacantPlaces = Long.valueOf(0);
@@ -79,8 +75,7 @@ public class StudentCreationServiceImpl implements StudentCreationService {
                 student.setStudentId(min);
             } else if (minAndMaxIdsInRange.isMinNextID) {
                 student.setStudentId(minAndMaxIdsInRange.min);
-            }
-            else if (min < minAndMaxIdsInRange.min) {
+            } else if (min < minAndMaxIdsInRange.min) {
                 student.setStudentId(minAndMaxIdsInRange.min - 1);
             } else if (max > minAndMaxIdsInRange.max) {
                 student.setStudentId(minAndMaxIdsInRange.max + 1);
@@ -90,7 +85,7 @@ public class StudentCreationServiceImpl implements StudentCreationService {
         }
     }
 
-    public Long countNumberOfIdsInRange(){
+    public Long countNumberOfIdsInRange() {
         return studentDAO.countNumberOfIdsInRange(min, max);
     }
 
