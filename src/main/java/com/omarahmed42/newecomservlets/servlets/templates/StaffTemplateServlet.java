@@ -4,9 +4,7 @@ import com.omarahmed42.newecomservlets.ejbs.CourseServiceImpl;
 import com.omarahmed42.newecomservlets.ejbs.StaffServiceImpl;
 import com.omarahmed42.newecomservlets.ejbs.TeachesCourseServiceImpl;
 import com.omarahmed42.newecomservlets.entities.CourseEntity;
-import com.omarahmed42.newecomservlets.entities.PrerequisiteEntity;
 import com.omarahmed42.newecomservlets.entities.StaffEntity;
-import com.omarahmed42.newecomservlets.entities.TeachesCourseEntity;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -56,7 +54,7 @@ public class StaffTemplateServlet extends HttpServlet {
         return courses;
     }
 
-    private boolean isTeaching(CourseEntity course, CourseEntity teachesCourse){
+    private boolean isTeaching(CourseEntity course, CourseEntity teachesCourse) {
         return course.getCourseCode().equals(teachesCourse.getCourseCode());
     }
 

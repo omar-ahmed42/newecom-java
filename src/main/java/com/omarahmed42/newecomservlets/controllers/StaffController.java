@@ -8,7 +8,6 @@ import javax.ejb.EJB;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.sql.Date;
 import java.time.LocalDate;
 
 @Path("/staff")
@@ -20,40 +19,41 @@ public class StaffController {
     private StaffServiceImpl staffService;
 
     @POST // Tested using postman
-    public Response addStaff(StaffEntity staff){
+    public Response addStaff(StaffEntity staff) {
         staffService.addStaff(staff);
         return Response.status(201).build();
     }
 
     @GET
     @Path("/id={id}") // Tested using postman
-    public Response getStaffById(@PathParam("id") Long id){
+    public Response getStaffById(@PathParam("id") Long id) {
         StaffEntity staff = staffService.getStaffById(id);
         return Response.ok(staff).build();
     }
 
     @PUT
-    @Path("/id/{id}{firstName: (/firstName/[^/]+?)?}{lastName: (/lastName/[^/]+?)?}{dob: (/dob/[^/]+?)?}") // Tested using postman
+    @Path("/id/{id}{firstName: (/firstName/[^/]+?)?}{lastName: (/lastName/[^/]+?)?}{dob: (/dob/[^/]+?)?}")
+    // Tested using postman
     public Response updateStaff(@PathParam("id") Long id, @PathParam("firstName") String firstName, @PathParam("lastName") String lastName,
-                                  @PathParam("dob") String dateOfBirth){
-        if (id == null){
+                                @PathParam("dob") String dateOfBirth) {
+        if (id == null) {
             return Response.status(400).build();
         }
 
         StaffEntity staff = staffService.getStaffById(id);
-        if (staff == null){
+        if (staff == null) {
             return Response.status(404).build();
         }
 
-        if (!isEmpty(firstName)){
+        if (!isEmpty(firstName)) {
             staff.setFirstName(firstName.split("/")[2]);
         }
 
-        if (!isEmpty(lastName)){
+        if (!isEmpty(lastName)) {
             staff.setLastName(lastName.split("/")[2]);
         }
 
-        if (!isEmpty(dateOfBirth)){
+        if (!isEmpty(dateOfBirth)) {
             staff.setDateOfBirth(LocalDate.parse((dateOfBirth.split("/")[2])));
         }
 
@@ -63,13 +63,13 @@ public class StaffController {
 
     @DELETE
     @Path("/id={id}") // Tested using postman
-    public Response deleteStaff(@PathParam("id") Long id){
-        if (id == null){
+    public Response deleteStaff(@PathParam("id") Long id) {
+        if (id == null) {
             return Response.status(400).build();
         }
 
         StaffEntity staff = staffService.getStaffById(id);
-        if (staff == null){
+        if (staff == null) {
             return Response.status(404).build();
         }
 
@@ -78,7 +78,7 @@ public class StaffController {
     }
 
 
-    private boolean isEmpty(String text){
+    private boolean isEmpty(String text) {
         return text.equals("");
     }
 }
